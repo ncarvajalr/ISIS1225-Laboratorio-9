@@ -49,7 +49,7 @@ def put(my_rbt, key, value):
         dict: El árbol actualizado.
     """
     my_rbt["root"] = insert_node(my_rbt["root"], key, value)
-    my_rbt["root"]["color"] = rbt.BLACK  # La raíz siempre debe ser negra
+    my_rbt["root"]["color"] = rbt.BLACK  
     return my_rbt
 
 def insert_node(root, key, value):
@@ -115,7 +115,6 @@ def remove(my_rbt, key):
             my_rbt["root"]["color"] = rbt.BLACK
     return my_rbt
 
-# Función recursiva para eliminar una llave
 def remove_key(root, key):
     if default_compare(key, root["key"]) < 0:
         if not rbt.is_red(root["left"]) and not rbt.is_red(root["left"].get("left")):
@@ -137,7 +136,6 @@ def remove_key(root, key):
 
     return balance(root)
 
-# Funciones auxiliares de rotación y balance
 def rotate_left(h):
     x = h["right"]
     h["right"] = x["left"]
@@ -188,7 +186,6 @@ def balance(h):
     h["size"] = size_tree(h["left"]) + size_tree(h["right"]) + 1
     return h
 
-# Función auxiliar de comparación
 def default_compare(key, node_key):
     if key < node_key:
         return -1
@@ -199,7 +196,6 @@ def default_compare(key, node_key):
 
 from rbt_node import new_node, is_red, get_value, get_key, change_color, RED, BLACK
 
-# Máscara para crear el árbol
 def new_map():
     """
     Crea un árbol rojo-negro vacío.
@@ -209,7 +205,6 @@ def new_map():
     """
     return {"root": None, "type": "RBT"}
 
-# Máscara para verificar si el árbol está vacío
 def is_empty(my_rbt):
     """
     Verifica si el árbol está vacío.
@@ -222,7 +217,6 @@ def is_empty(my_rbt):
     """
     return my_rbt["root"] is None
 
-# Máscara para contar el tamaño
 def size(my_rbt):
     """
     Retorna el número de entradas en el árbol.
@@ -235,11 +229,9 @@ def size(my_rbt):
     """
     return size_tree(my_rbt["root"])
 
-# Función recursiva para contar el tamaño
 def size_tree(root):
     return root["size"] if root else 0
 
-# Máscara para insertar una llave-valor
 def put(my_rbt, key, value):
     """
     Inserta una pareja llave-valor en el árbol.
@@ -253,10 +245,9 @@ def put(my_rbt, key, value):
         dict: El árbol actualizado.
     """
     my_rbt["root"] = insert_node(my_rbt["root"], key, value)
-    my_rbt["root"]["color"] = BLACK  # La raíz siempre debe ser negra
+    my_rbt["root"]["color"] = BLACK
     return my_rbt
 
-# Función recursiva para insertar una llave-valor
 def insert_node(root, key, value):
     if root is None:
         return new_node(key, value, RED)
@@ -269,7 +260,6 @@ def insert_node(root, key, value):
     else:
         root["value"] = value
 
-    # Ajuste de árbol rojo-negro
     if is_red(root["right"]) and not is_red(root["left"]):
         root = rotate_left(root)
     if is_red(root["left"]) and is_red(root["left"].get("left")):
@@ -280,7 +270,6 @@ def insert_node(root, key, value):
     root["size"] = size_tree(root["left"]) + size_tree(root["right"]) + 1
     return root
 
-# Máscara para obtener un valor
 def get(my_rbt, key):
     """
     Obtiene el valor asociado a una llave en el árbol.
@@ -294,7 +283,6 @@ def get(my_rbt, key):
     """
     return get_node(my_rbt["root"], key)
 
-# Función recursiva para obtener un valor
 def get_node(root, key):
     while root:
         cmp = default_compare(key, root["key"])
@@ -306,7 +294,6 @@ def get_node(root, key):
             return root["value"]
     return None
 
-# Máscara para eliminar una llave
 def remove(my_rbt, key):
     """
     Elimina una pareja llave-valor del árbol.
@@ -324,7 +311,6 @@ def remove(my_rbt, key):
             my_rbt["root"]["color"] = BLACK
     return my_rbt
 
-# Función recursiva para eliminar una llave
 def remove_key(root, key):
     if default_compare(key, root["key"]) < 0:
         if not is_red(root["left"]) and not is_red(root["left"].get("left")):
@@ -346,7 +332,6 @@ def remove_key(root, key):
 
     return balance(root)
 
-# Funciones auxiliares de rotación y balance
 def rotate_left(h):
     x = h["right"]
     h["right"] = x["left"]
@@ -397,7 +382,6 @@ def balance(h):
     h["size"] = size_tree(h["left"]) + size_tree(h["right"]) + 1
     return h
 
-# Función auxiliar de comparación
 def default_compare(key, node_key):
     if key < node_key:
         return -1
@@ -420,7 +404,6 @@ def min_node_tree(root):
         root = root["left"]
     return root
 
-# Función para eliminar el nodo con la clave mínima en un subárbol
 def delete_min(root):
     """
     Elimina el nodo con la clave mínima en el subárbol dado.
